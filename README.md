@@ -33,7 +33,8 @@ Example usage showing generating `MemGPT` like functions.
 1. **Defining Function Calls**: Create `FunctionCall` instances for each function you want the LLM to call, defining parameters using `FunctionParameter` and `FunctionParameters`.
 2. **Generating GGML BNF Grammar**: Use `generate_gbnf_grammar` to create GGML BNF grammar rules for these function calls, for use with llama.cpp.
 3. **Generating Documentation**: Use `generate_documentation` to produce human-readable documentation for these function calls.
-4. **Executing Function Calls with LLMFunctionCaller**: Use the `LLMFunctionCaller` to execute these defined function calls dynamically.
+4. **Generate Function Call with LLM**: Use llama.cpp to generate a JSON function call with the grammar.
+5. **Executing Function Calls with LLMFunctionCaller**: Use the `LLMFunctionCaller` to execute these defined function calls dynamically.
 
 #### LLMFunctionCaller Methods
 - `add_function(name, function)`: Adds a function to the executor.
