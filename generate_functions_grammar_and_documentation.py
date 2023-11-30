@@ -1,0 +1,5 @@
+from llm_function_calling import gpt_functions
+
+
+gpt_functions.generate_gpt_functions_grammar_and_documentation()
+

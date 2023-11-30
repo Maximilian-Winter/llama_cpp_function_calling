@@ -1,0 +1,84 @@
+Available Functions:
+
+send_message:
+  Description:Sends a message to the User.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the message.
+    message (string, required): Message you want to send to the user.
+
+core_memory_Append:
+  Description:Append to Core Memory.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the value.
+    key (string, required): The memory key, like 'persona', 'goals', 'situation' or 'human'.
+    field (string, required): The field which should be appended.
+    value (string, required): The information you would like to save.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+core_memory_replace:
+  Description:Replace parts of Core Memory.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the value.
+    key (string, required): The memory key, like 'persona', 'goals', 'situation' or 'human'.
+    field (string, required): The field where the memory should be replaced like 'personality' or 'traits'.
+    value (string, required): The information you would like to write into the field.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+archival_memory_insert:
+  Description:Add memory to Archival Memory.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the value,
+    value (string, required): The content you want to add.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+archival_memory_search:
+  Description:Search in Archival Memory.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the query.
+    query (string, required): Your search query.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+cmd_command:
+  Description:Execute CMD command.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the command.
+    command (string, required): The CMD command to execute.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+web_browsing:
+  Description:Opens a website and returns content.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the url.
+    URL (string, required): The URL you want to access.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+web_download:
+  Description:Downloads a file.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the url.
+    URL (string, required): The URL you want to download.
+    Path (string, required): The Path you want to download the file to.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+read_file:
+  Description:Returns content of a file.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the file path.
+    File (string, required): The path of the file you want to open.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+write_file:
+  Description:Writes to a file.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the file.
+    File (string, required): The path of the file you want to write.
+    Content (string, required): The content of the file you want to write.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+python_interpreter_command:
+  Description:Execute Python command.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the command.
+    command (string, required): The Python command to execute.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+

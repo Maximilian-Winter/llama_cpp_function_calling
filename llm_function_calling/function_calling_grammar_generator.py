@@ -1,3 +1,4 @@
+import os
 from typing import List
 
 from .function_call import FunctionCall
@@ -73,8 +74,9 @@ def generate_gbnf_rule(function_call):
 
 def save_grammar_to_file(grammar_str, file_path):
     try:
-        primary_grammar = ""
-        with open("primitive.gbnf", 'r', encoding='utf-8') as file:
+        script_path = os.path.abspath(__file__)
+        script_dir = os.path.dirname(script_path)
+        with open(f"{script_dir}/primitive.gbnf", 'r', encoding='utf-8') as file:
             primary_grammar = file.read()
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(grammar_str + "\n" + primary_grammar)
