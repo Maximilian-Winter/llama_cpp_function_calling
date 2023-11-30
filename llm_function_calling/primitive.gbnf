@@ -1,0 +1,4 @@
+string ::= "\""   ([^"\[\]{}]*)   "\""
+boolean ::= "true" | "false"
+ws ::= ""
+number ::= [0-9]+
