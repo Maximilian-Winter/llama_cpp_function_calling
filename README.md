@@ -1,7 +1,18 @@
 ### llama.cpp Grammar Generator for LLM Function Calls
 
 #### Overview
-This system is designed for generating grammars and documentation for structured function calls in GGML BNF (GGML Backus-Naur Form), tailored for Large Language Models (LLMs) used with llama.cpp . It allows LLMs to understand and execute function calls in a syntactically correct and semantically meaningful manner.
+This package is designed for generating grammars and documentation for structured function calls in GGML BNF (GGML Backus-Naur Form), tailored for Large Language Models (LLMs) used with llama.cpp . 
+The documentation is designed to explain the functions to the LLM.
+
+At the moment it supports following types as function parameter:
+
+- `string`
+- `boolean`
+- `number`
+- `float`
+- `exponent`
+- `dictionary` Has to consist out of `string` keys and existing types as values.
+
 
 #### Components
 `function_call.py`:

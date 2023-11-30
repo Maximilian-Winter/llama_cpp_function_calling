@@ -6,9 +6,10 @@ from .function_call import FunctionCall, FunctionParameters, FunctionParameter
 # SendMessage FunctionCall
 send_message = FunctionCall(
     name='send_message',
+    description="Sends a message to the User.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
-                                            description="Your inner thoughts or inner monologue while writing the response."),
+                                            description="Your inner thoughts or inner monologue while writing the message."),
         "message": FunctionParameter(parameter_type="string", required=True,
                                      description="Message you want to send to the user.")
     })
@@ -17,6 +18,7 @@ send_message = FunctionCall(
 # CoreMemoryAppend FunctionCall
 core_memory_append = FunctionCall(
     name='core_memory_Append',
+    description="Append to Core Memory.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the value."),
@@ -34,6 +36,7 @@ core_memory_append = FunctionCall(
 # CoreMemoryReplace FunctionCall
 core_memory_replace = FunctionCall(
     name='core_memory_replace',
+    description="Replace parts of Core Memory.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the value."),
@@ -51,6 +54,7 @@ core_memory_replace = FunctionCall(
 # ArchivalMemoryInsert FunctionCall
 archival_memory_insert = FunctionCall(
     name='archival_memory_insert',
+    description="Add memory to Archival Memory.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the value,"),
@@ -64,6 +68,7 @@ archival_memory_insert = FunctionCall(
 # ArchivalMemorySearch FunctionCall
 archival_memory_search = FunctionCall(
     name='archival_memory_search',
+    description="Search in Archival Memory.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the query."),
@@ -77,6 +82,7 @@ archival_memory_search = FunctionCall(
 # CmdCommand FunctionCall
 cmd_command = FunctionCall(
     name='cmd_command',
+    description="Execute CMD command.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the command."),
@@ -90,6 +96,7 @@ cmd_command = FunctionCall(
 # WebBrowsing FunctionCall
 web_browsing = FunctionCall(
     name='web_browsing',
+    description="Opens a website and returns content.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the url."),
@@ -103,6 +110,7 @@ web_browsing = FunctionCall(
 # WebDownload FunctionCall
 web_download = FunctionCall(
     name='web_download',
+    description="Downloads a file.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the url."),
@@ -118,6 +126,7 @@ web_download = FunctionCall(
 # ReadFile FunctionCall
 read_file = FunctionCall(
     name='read_file',
+    description="Returns content of a file.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the file path."),
@@ -131,6 +140,7 @@ read_file = FunctionCall(
 # WriteFile FunctionCall
 write_file = FunctionCall(
     name='write_file',
+    description="Writes to a file.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the file."),
@@ -146,6 +156,7 @@ write_file = FunctionCall(
 # PythonInterpreterCommand FunctionCall
 python_interpreter_command = FunctionCall(
     name='python_interpreter_command',
+    description="Execute Python command.",
     parameters=FunctionParameters({
         "inner_thoughts": FunctionParameter(parameter_type="string", required=True,
                                             description="Your inner thoughts or inner monologue while writing the command."),

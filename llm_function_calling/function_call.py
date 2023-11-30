@@ -16,7 +16,8 @@ class FunctionParameters:
 
 
 class FunctionCall:
-    def __init__(self, name: str, parameters: FunctionParameters):
+    def __init__(self, name: str, description: str, parameters: FunctionParameters):
         self.name = name
         self.parameters = parameters
+        self.description = description
 

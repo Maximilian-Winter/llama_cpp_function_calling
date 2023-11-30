@@ -30,7 +30,7 @@ def generate_gbnf_grammar(functions: List[FunctionCall]) -> str:
             param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type}"
             i += 1
 
-        param_rules += " ws \"}}\""
+        param_rules += " ws \"}\""
 
         # Main function rule
         function_rule = f"{function_name} ::= \"{{\" ws \"\\\"function\\\":\" ws \"\\\"{function_call.name}\\\",\" ws \"\\\"params\\\":\" ws {function_name}Params \"}}\""
@@ -84,10 +84,10 @@ def save_grammar_to_file(grammar_str, file_path):
 
 
 def generate_documentation(function_calls):
-    documentation = ""
+    documentation = "Available Functions:\n\n"
     for func in function_calls:
         # Function name and description
-        documentation += f"{capitalize_rule_name(func.name)}:\n"
+        documentation += f"{func.name}:\n  Description:{func.description}\n  Parameters:\n"
 
         # Parameters and their descriptions
         for param_name, param in func.parameters.properties.items():
