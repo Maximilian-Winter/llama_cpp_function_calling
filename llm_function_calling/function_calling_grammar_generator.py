@@ -89,7 +89,7 @@ def generate_documentation(function_calls):
     documentation = "Available Functions:\n\n"
     for func in function_calls:
         # Function name and description
-        documentation += f"{func.name}:\n  Description:{func.description}\n  Parameters:\n"
+        documentation += f"{func.name}:\n  Description: {func.description}\n  Parameters:\n"
 
         # Parameters and their descriptions
         for param_name, param in func.parameters.properties.items():
