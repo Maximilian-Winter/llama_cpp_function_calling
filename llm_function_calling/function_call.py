@@ -1,8 +1,16 @@
+from enum import Enum
 from typing import Optional, Dict, List
 
 
+class DataType(Enum):
+    STRING = "string"
+    BOOLEAN = "boolean"
+    NUMBER = "number"
+    FLOAT = "float"
+
+
 class FunctionParameter:
-    def __init__(self, parameter_type: str, required: bool, description: Optional[str] = None,
+    def __init__(self, parameter_type: DataType, required: bool, description: Optional[str] = None,
                  enum: Optional[List[str]] = None):
         self.type = parameter_type
         self.required = required
@@ -20,4 +28,3 @@ class FunctionCall:
         self.name = name
         self.parameters = parameters
         self.description = description
-

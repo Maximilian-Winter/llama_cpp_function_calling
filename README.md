@@ -10,9 +10,6 @@ At the moment it supports following types as function parameter:
 - `boolean`
 - `number`
 - `float`
-- `exponent`
-- `dictionary` Has to consist out of `string` keys and existing types as values.
-
 
 #### Components
 `function_call.py`:
@@ -55,3 +52,45 @@ You can find a complete example in `gpt_functions.py`
 #### File Saving
 - Use `save_grammar_to_file` to save the generated GGML BNF grammar.
 - Use `save_documentation_to_file` to save the documentation.
+
+
+### Example output using OpenHermes and the example functions in `gpt_functions.py` converted to a grammar
+
+````text
+>Can you write a long poem about the USA in the "HelloUSA.txt" file?
+<|im_start|>system
+Available Functions:
+
+send_message:
+  Description:Sends a message to the User.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the message.
+    message (string, required): Message you want to send to the user.
+
+read_file:
+  Description:Returns content of a file.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the file path.
+    File (string, required): The path of the file you want to open.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+write_file:
+  Description:Writes to a file.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the file.
+    File (string, required): The path of the file you want to write.
+    Content (string, required): The content of the file you want to write.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.
+
+python_interpreter_command:
+  Description:Execute Python command.
+  Parameters:
+    inner_thoughts (string, required): Your inner thoughts or inner monologue while writing the command.
+    command (string, required): The Python command to execute.
+    require_heartbeat (boolean, required): Set this to true to get control back after execution, to chain functions together.<|im_end|>
+<|im_start|>user
+Maximilian: "Can you write a long poem about the USA in the "HelloUSA.txt" file?" <|im_end|>
+<|im_start|>assistant
+Llama.generate: prefix-match hit
+{"function":"write_file","params":{"inner_thoughts":"I'm thinking about composing a poem on the United States and saving it as 'HelloUSA.txt'.","File":"HelloUSA.txt","Content":"In search of liberty, they came from far and wide,\nA melting pot of cultures, a land so grand and vast.\nFrom coast to coast, through mountains high and tide,\nTheir dreams intertwined, their stories merged at last.\n\nBoldly they ventured, brave and free,\nSeeking opportunity, hope, and solace too,\nWith unity and strength, they forged a nation strong,\nAnd freedom's light would forever shine anew.\n\nThrough strife and struggle, battles fierce and fight,\nThey built a home where all could find their place,\nWhere justice reigns, and rights are right,\nAnd every soul can carve its own unique grace.\n\nUnited we stand, with colors bold,\nRed, white, and blue our flag unfurls,\nTogether now, our future told,\nOf unity, not division, evermore.\n\nThis land of dreams, where destiny unfolds,\nA beacon bright, a shining star that guides,\nA story written by hearts of gold,\nAcross these lands, across these tides.","require_heartbeat":true}}
+````

@@ -4,6 +4,3 @@ ws ::= ""
 number ::= [0-9]+
 float ::= number "." number [exponent]
 exponent ::= ("e" | "E") ["+" | "-"] number
-dictionary ::= "{" ws [pair (ws "," ws pair)*] ws "}"
-pair ::= string ws ":" ws value
-value ::= string | number | float | boolean | dictionary | array

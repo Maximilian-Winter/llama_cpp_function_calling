@@ -27,7 +27,7 @@ def generate_gbnf_grammar(functions: List[FunctionCall]) -> str:
         for _, (param_name, param) in enumerate(function_call.parameters.properties.items()):
             if i > 0:
                 param_rules += "\",\" ws "  # Including the comma within quotes
-            param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type}"
+            param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type.value}"
             i += 1
 
         param_rules += " ws \"}\""
@@ -61,7 +61,7 @@ def generate_gbnf_rule(function_call):
     for i, (param_name, param) in enumerate(function_call.parameters.properties.items()):
         if i > 0:
             param_rules += " \",\" ws "  # Including the comma within quotes
-        param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type}"
+        param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type.value}"
 
     param_rules += " ws \"}}\""
 
@@ -91,7 +91,7 @@ def generate_documentation(function_calls):
 
         # Parameters and their descriptions
         for param_name, param in func.parameters.properties.items():
-            documentation += f"    {param_name} ({param.type}, {'required' if param.required else 'optional'}): "
+            documentation += f"    {param_name} ({param.type.value}, {'required' if param.required else 'optional'}): "
             documentation += f"{param.description}\n"
             if param.enum:
                 documentation += f"        Enum: {', '.join(param.enum)}\n"
