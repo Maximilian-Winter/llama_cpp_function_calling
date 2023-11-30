@@ -1,10 +1,9 @@
 ### llama.cpp Grammar Generator for LLM Function Calls
 
 #### Overview
-This package is designed for generating grammars and documentation for structured function calls in GGML BNF (GGML Backus-Naur Form), tailored for Large Language Models (LLMs) used with llama.cpp . 
-The documentation is designed to explain the functions to the LLM.
+This package is designed for generating grammars and documentation for structured function calls in GGML BNF (GGML Backus-Naur Form), tailored for Large Language Models (LLMs) used with llama.cpp. The documentation is designed to explain the functions to the LLM. The `LLMFunctionCaller` is for dynamic function execution based on JSON inputs generated through the grammar generated.
 
-At the moment it supports following types as function parameter:
+At the moment it supports the following types as function parameters:
 
 - `string`
 - `boolean`
@@ -25,36 +24,38 @@ At the moment it supports following types as function parameter:
 `gpt_functions.py`:
 Example usage showing generating `MemGPT` like functions.
 
+`llm_function_caller.py`:
+- Dynamically executes functions based on JSON input generated through the grammar generated.
+- Supports adding new functions and parameter transformers at runtime.
+- Incorporates robust error handling and logging.
+
 #### Usage
 1. **Defining Function Calls**: Create `FunctionCall` instances for each function you want the LLM to call, defining parameters using `FunctionParameter` and `FunctionParameters`.
-   
 2. **Generating GGML BNF Grammar**: Use `generate_gbnf_grammar` to create GGML BNF grammar rules for these function calls, formatted for LLMs.
-   
 3. **Generating Documentation**: Use `generate_documentation` to produce human-readable documentation for these function calls.
+4. **Executing Function Calls with LLMFunctionCaller**: Use the `LLMFunctionCaller` to execute these defined function calls dynamically.
 
-#### Example
-Define a function call like `send_message`:
+#### LLMFunctionCaller Methods
+- `add_function(name, function)`: Adds a function to the executor.
+- `add_param_transformer(function_name, transformer)`: Adds a parameter transformer for a specific function.
+- `execute_function(json_input)`: Executes a function based on JSON input.
+
+#### Example for LLMFunctionCaller
 ```python
-send_message = FunctionCall(
-    name='send_message',
-    parameters=FunctionParameters({
-        "message": FunctionParameter(parameter_type="string", required=True,
-                                     description="Message you want to send.")
-    })
-)
+function_caller = LLMFunctionCaller()
+function_caller.add_function("sample_function", sample_function)
+function_caller.add_param_transformer("sample_function", example_transformer)
+json_input = '{"function":"sample_function","params":{"arg1": "hello", "arg2": "world"}}'
+result = function_caller.execute_function(json_input)
+print(result)
 ```
-Then generate its GGML BNF grammar and documentation:
-```python
-generate_gbnf_grammar([send_message])
-generate_documentation([send_message])
-```
-You can find a complete example in `gpt_functions.py`
+
 #### File Saving
 - Use `save_grammar_to_file` to save the generated GGML BNF grammar.
 - Use `save_documentation_to_file` to save the documentation.
 
-
 ### Example output using OpenHermes and the example functions in `gpt_functions.py` converted to a grammar
+
 
 ````text
 >Can you write a long poem about the USA in the "HelloUSA.txt" file?
