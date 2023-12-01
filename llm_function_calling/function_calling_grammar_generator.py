@@ -71,7 +71,7 @@ def generate_gbnf_rule(function_call):
             param_rules += f"\"\\\"{param_name}\\\":\" ws {param.type.value}"
 
     # Close the parameter rules
-    param_rules += " ws \"}}\""
+    param_rules += " ws \"}\""
 
     return function_rule, param_rules
 
