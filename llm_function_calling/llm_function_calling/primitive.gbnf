@@ -1,0 +1,10 @@
+string ::= "\""   ([^"\[\]{}]*)   "\""
+boolean ::= "true" | "false"
+ws ::= ""
+number ::= [0-9]+
+float ::= number "." number exponent?
+exponent ::= ("e" | "E") ("+" | "-")? number
+object ::= "{" ws (keyValuePair ("," ws keyValuePair)*)? ws "}"
+array ::= "[" ws (value ("," ws value)*)? ws "]"
+keyValuePair ::= string ":" ws value
+value ::= string | number | float | boolean | object | array
