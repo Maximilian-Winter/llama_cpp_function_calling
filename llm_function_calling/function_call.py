@@ -7,15 +7,22 @@ class DataType(Enum):
     BOOLEAN = "boolean"
     NUMBER = "number"
     FLOAT = "float"
+    OBJECT = "object"  # New type for objects
+    ARRAY = "array"    # New type for arrays
 
 
 class FunctionParameter:
-    def __init__(self, parameter_type: DataType, required: bool, description: Optional[str] = None,
-                 enum: Optional[List[str]] = None):
+    def __init__(self, parameter_type: DataType, required: bool,
+                 description: Optional[str] = None,
+                 enum: Optional[List[str]] = None,
+                 structure: Optional[Dict[str, 'FunctionParameter']] = None,  # For objects
+                 element_type: Optional['FunctionParameter'] = None):         # For arrays
         self.type = parameter_type
         self.required = required
         self.description = description
         self.enum = enum
+        self.structure = structure
+        self.element_type = element_type
 
 
 class FunctionParameters:

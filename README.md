@@ -5,6 +5,8 @@ This package is designed for generating grammars and documentation for structure
 
 At the moment it supports the following types as function parameters:
 
+- `object`
+- `array`
 - `string`
 - `boolean`
 - `number`

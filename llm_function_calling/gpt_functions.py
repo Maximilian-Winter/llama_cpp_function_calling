@@ -1,8 +1,8 @@
 from .function_call import DataType
-from .function_calling_grammar_generator import generate_gbnf_grammar, generate_documentation, save_documentation_to_file
+from .function_calling_grammar_generator import generate_gbnf_grammar, generate_documentation, \
+    save_documentation_to_file
 from .function_calling_grammar_generator import save_grammar_to_file
 from .function_call import FunctionCall, FunctionParameters, FunctionParameter
-
 
 # SendMessage FunctionCall
 send_message = FunctionCall(
@@ -175,11 +175,76 @@ def generate_gpt_functions_grammar_and_documentation():
                       archival_memory_search, cmd_command, web_browsing, web_download, read_file,
                       write_file, python_interpreter_command]
 
+    # function_calls = [create_user_profile, create_order]
     # Generate the documentation
     doc = generate_documentation(function_calls)
     print(doc)
     save_documentation_to_file(doc, 'function_documentation.txt')
-    function_calls = [send_message, core_memory_append, core_memory_replace, archival_memory_insert,
-                      archival_memory_search,
-                      cmd_command, web_browsing, web_download, read_file, write_file, python_interpreter_command]
+
     save_grammar_to_file(generate_gbnf_grammar(function_calls), "gen_function_calling.gbnf")
+
+
+class Address:
+    def __init__(self, street, city, zip_code):
+        self.street = street
+        self.city = city
+        self.zip_code = zip_code
+
+
+class UserProfile:
+    def __init__(self, username, email, address: Address, is_active):
+        self.username = username
+        self.email = email
+        self.address = address
+        self.is_active = is_active
+
+
+class OrderItem:
+    def __init__(self, item_id, quantity):
+        self.item_id = item_id
+        self.quantity = quantity
+
+
+class Order:
+    def __init__(self, user_id, items: [OrderItem]):
+        self.user_id = user_id
+        self.items = items
+
+
+# Define the structure for an Address in GBNF
+address_structure = {
+    "street": FunctionParameter(DataType.STRING, True, "Street name and number"),
+    "city": FunctionParameter(DataType.STRING, True, "City name"),
+    "zip_code": FunctionParameter(DataType.STRING, True, "Postal or ZIP code")
+}
+
+# Define the structure for a UserProfile in GBNF
+user_profile_params = FunctionParameters({
+    "username": FunctionParameter(DataType.STRING, True, "User's unique username"),
+    "email": FunctionParameter(DataType.STRING, True, "User's email address"),
+    "address": FunctionParameter(DataType.OBJECT, True, "User's physical address", structure=address_structure),
+    "is_active": FunctionParameter(DataType.BOOLEAN, True, "Indicates if the user profile is active")
+})
+
+# Create FunctionCall instance for creating a user profile
+create_user_profile = FunctionCall("create_user_profile",
+                                   "Create a new user profile with username, email, address, and activity status",
+                                   user_profile_params)
+
+# Define the structure for an OrderItem in GBNF
+order_item_structure = {
+    "item_id": FunctionParameter(DataType.STRING, True, "Unique identifier for the item"),
+    "quantity": FunctionParameter(DataType.NUMBER, True, "Number of items to order")
+}
+
+# Define the structure for an Order in GBNF
+order_params = FunctionParameters({
+    "user_id": FunctionParameter(DataType.STRING, True, "Identifier of the user placing the order"),
+    "items": FunctionParameter(DataType.ARRAY, True, "List of items to be included in the order",
+                               element_type=FunctionParameter(DataType.OBJECT, True, structure=order_item_structure))
+})
+
+# Create FunctionCall instance for creating an order
+create_order = FunctionCall("create_order",
+                            "Create a new order for a user, including a list of items and quantities",
+                            order_params)
